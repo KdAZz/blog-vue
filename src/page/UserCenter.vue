@@ -31,32 +31,48 @@
         </el-card>
         <div style="margin-top: 7px" class="columns">
             <div class="column" style="padding: 0">
-                <el-col :span="12" class="el-card" style="width: 100%">
+                <el-col :span="12" class="el-card" style="width: 100%; margin-bottom: 7px">
                     <el-menu
-                        default-active="2"
-                        class="el-menu-vertical-demo">
-                        <el-menu-item index="1">
+                        :default-active="activeIndex"
+                        class="el-menu-vertical-demo"
+                        :router="true">
+                        <el-menu-item index="/UserCenter/HomeComponent">
                             <i class="el-icon-menu"></i>
                             <span slot="title">首页</span>
                         </el-menu-item>
-                        <el-menu-item index="2">
+                        <el-menu-item index="/UserCenter/UserInfo">
                             <i class="el-icon-document"></i>
                             <span slot="title">个人信息</span>
                         </el-menu-item>
-                        <el-menu-item index="3">
+                        <el-menu-item index="/UserCenter/SettingCenter">
                             <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
+                            <span slot="title">设置中心</span>
                         </el-menu-item>
                     </el-menu>
                 </el-col>
                 <el-card>
-                    <div class="level">
-                        Lv1
+                    <div class="CreatorEntrance-title" style="display: -webkit-flex;">
+                        等级中心
+                        <div class="level">
+                            Lv1
+                        </div>
                     </div>
+                    <div style="margin-top: 7px;border-radius: 4px;">
+                        <el-carousel height="120px" direction="vertical" :autoplay="false">
+                            <el-carousel-item v-for="item in 3" :key="item">
+                                <p class="medium">{{ item }}</p>
+                            </el-carousel-item>
+                        </el-carousel>
+                    </div>
+                    <el-button style="width: 100%; margin-top: 10px" type="primary" plain>
+                        进入升级中心<i class="el-icon-arrow-right"></i>
+                    </el-button>
                 </el-card>
             </div>
-            <el-card style="margin-left: 7px" class="column is-three-quarters">
-                aa
+            <el-card style="margin-left: 7px; padding-top: 0;" class="column is-two-thirds">
+                <el-main>
+                    <router-view/>
+                </el-main>
             </el-card>
         </div>
     </div>
@@ -64,7 +80,12 @@
 
 <script>
 export default {
-    name: "UserCenter"
+    name: "UserCenter",
+    data() {
+        return {
+            activeIndex: '/UserCenter/HomeComponent',
+        }
+    },
 }
 </script>
 
@@ -154,19 +175,45 @@ export default {
     margin-right: 0;
     margin-top: 0;
 }
+
 .level {
     box-sizing: border-box;
-    margin: 0px 0px 0px 4px;
-    min-width: 0px;
+    min-width: 0;
     color: rgb(5, 109, 232);
     cursor: pointer;
     width: 29px;
-    height: 18px;
-    line-height: 18px;
     text-align: center;
     background: rgba(5, 109, 232, 0.08);
     border-radius: 4px;
     font-size: 12px;
-    font-weight: 590;
+    font-weight: 700;
+    justify-content: center;
+    align-items: Center;
+}
+
+.CreatorEntrance-title {
+    font-size: 14px;
+    font-synthesis: style;
+    font-weight: 600;
+}
+
+.el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+    background-color: #acbac7;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+    background-color: #dde1e8;
+}
+
+.el-carousel__item {
+    border-radius: 4px;
 }
 </style>

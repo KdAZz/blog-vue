@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import HomePage from "@/components/HomePage";
+import HomePage from "@/page/HomePage.vue";
 import ModalForm from "@/components/ModalForm.vue";
 export default {
   name: 'IndexPage',
