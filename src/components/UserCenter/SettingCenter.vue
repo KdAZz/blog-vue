@@ -1,12 +1,15 @@
 <template>
     <div>
-        设置中新
+        <PersonalInfo/>
     </div>
 </template>
 
 <script>
+import PersonalInfo from "@/page/PersonalInfo.vue";
+
 export default {
-    name: "SettingCenter"
+    name: "SettingCenter",
+    components: {PersonalInfo}
 }
 </script>
 

@@ -6,7 +6,7 @@ export function login(data) {
         params: data,
         headers: {
             'authorization': 'Basic a2Rheno6a2Rheno='
-        },
+        }
     })
 }
 export function getInfo() {
@@ -16,3 +16,10 @@ export function getInfo() {
     })
 }
 
+export function getFollow(data) {
+    return request({
+        url: '/service-article/article/follow',
+        method: 'get',
+        params: data
+    })
+}

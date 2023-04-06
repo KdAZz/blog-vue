@@ -7,8 +7,11 @@ import store from './store'
 import '@mdi/font/css/materialdesignicons.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import Vuesax from 'vuesax'
+import 'vuesax/dist/vuesax.css'
 
 Vue.use(Buefy)
+Vue.use(Vuesax, {})
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

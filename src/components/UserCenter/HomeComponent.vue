@@ -22,6 +22,12 @@
                         </el-card>
                     </el-timeline-item>
                 </el-timeline>
+                <div class="block">
+                    <el-pagination
+                        layout="prev, pager, next"
+                        :total="50">
+                    </el-pagination>
+                </div>
             </div>
         </el-tab-pane>
         <el-tab-pane label="发表文章" name="second">配置管理</el-tab-pane>

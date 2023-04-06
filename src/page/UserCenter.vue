@@ -1,91 +1,136 @@
 <template>
-    <div class="container is-max-desktop">
-        <el-card :body-style="{ padding: '0px' }">
-            <div class="UserCover UserCover--colorBlock"></div>
-            <div class="ProfileHeader-wrapper">
-                <div class="ProfileHeader-main">
-                    <div class="ProfileHeader-avatar" style="top: -74px;">
-                        <div class="UserAvatar">
-                            <img class="Avatar" width="160" height="160"
-                                 src="https://pic1.zhimg.com/v2-abed1a8c04700ba7d72b45195223e0ff_xl.jpg?source=32738c0c"
-                                 srcset="https://pic1.zhimg.com/v2-abed1a8c04700ba7d72b45195223e0ff_xll.jpg?source=32738c0c 2x"
-                                 alt="">
+    <div>
+        <div class="container is-max-desktop">
+            <el-card :body-style="{ padding: '0px' }">
+                <div class="UserCover UserCover--colorBlock"></div>
+                <div class="ProfileHeader-wrapper">
+                    <div class="ProfileHeader-main">
+                        <div class="ProfileHeader-avatar" style="top: -74px;">
+                            <div class="UserAvatar">
+                                <img class="Avatar" width="160" height="160"
+                                     :src="userInfo.avatar"
+                                     srcset="https://pic1.zhimg.com/v2-abed1a8c04700ba7d72b45195223e0ff_xll.jpg?source=32738c0c 2x"
+                                     alt="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="ProfileHeader-content">
-                        <div style="margin-bottom: 16px;">
-                            <h1 style="display: flex; align-items: center">
-                                <span class="ProfileHeader-name">KdAZz</span>
-                                <span class="ztext ProfileHeader-headline">啥都不会</span>
-                            </h1>
-                        </div>
-                        <div class="ProfileHeader-contentFooter">
-                            <b-button>测试</b-button>
-                            <div class="ProfileHeader-buttons">
-                                <el-button type="primary" plain>编辑个人资料</el-button>
+                        <div class="ProfileHeader-content">
+                            <div style="margin-bottom: 16px;">
+                                <h1 style="display: flex; align-items: center">
+                                    <span class="ProfileHeader-name">{{ userInfo.nickname }}</span>
+                                    <span class="ztext ProfileHeader-headline">{{ userInfo.email }}</span>
+                                </h1>
+                            </div>
+                            <div class="ProfileHeader-contentFooter">
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </el-card>
-        <div style="margin-top: 7px" class="columns">
-            <div class="column" style="padding: 0">
-                <el-col :span="12" class="el-card" style="width: 100%; margin-bottom: 7px">
-                    <el-menu
-                        :default-active="activeIndex"
-                        class="el-menu-vertical-demo"
-                        :router="true">
-                        <el-menu-item index="/UserCenter/HomeComponent">
-                            <i class="el-icon-menu"></i>
-                            <span slot="title">首页</span>
-                        </el-menu-item>
-                        <el-menu-item index="/UserCenter/UserInfo">
-                            <i class="el-icon-document"></i>
-                            <span slot="title">个人信息</span>
-                        </el-menu-item>
-                        <el-menu-item index="/UserCenter/SettingCenter">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">设置中心</span>
-                        </el-menu-item>
-                    </el-menu>
-                </el-col>
-                <el-card>
-                    <div class="CreatorEntrance-title" style="display: -webkit-flex;">
-                        等级中心
-                        <div class="level">
-                            Lv1
+            </el-card>
+            <div style="margin-top: 7px" class="columns">
+                <div class="column" style="padding: 0">
+                    <el-card style="margin-bottom: 7px; padding-bottom: 10px;">
+                        <div class="Followed Border">
+                            <p class="NumberBoard-itemName">关注了</p>
+                            <p class="NumberBoard-itemValue" title="8">{{ followInfo[1] }}</p>
                         </div>
-                    </div>
-                    <div style="margin-top: 7px;border-radius: 4px;">
-                        <el-carousel height="120px" direction="vertical" :autoplay="false">
-                            <el-carousel-item v-for="item in 3" :key="item">
-                                <p class="medium">{{ item }}</p>
-                            </el-carousel-item>
-                        </el-carousel>
-                    </div>
-                    <el-button style="width: 100%; margin-top: 10px" type="primary" plain>
-                        进入升级中心<i class="el-icon-arrow-right"></i>
-                    </el-button>
+                        <div class="Followed">
+                            <p class="NumberBoard-itemName">关注者</p>
+                            <p class="NumberBoard-itemValue" title="8">{{ followInfo[0] }}</p>
+                        </div>
+                    </el-card>
+                    <el-card style="margin-bottom: 7px;">
+                        <div class="CreatorEntrance-title" style="display: -webkit-flex;">
+                            等级中心
+                            <div class="level">
+                                Lv1
+                            </div>
+                        </div>
+                        <div style="margin-top: 7px;border-radius: 4px;">
+                            <el-carousel height="120px" direction="vertical" :autoplay="false">
+                                <el-carousel-item v-for="item in 3" :key="item">
+                                    <p class="medium">{{ item }}</p>
+                                </el-carousel-item>
+                            </el-carousel>
+                        </div>
+                        <el-button @click="pointCenter" style="width: 100%; margin-top: 10px" type="primary" plain>
+                            进入升级中心<i class="el-icon-arrow-right"></i>
+                        </el-button>
+                    </el-card>
+                    <el-col :span="12" class="el-card" style="width: 100%">
+                        <el-menu
+                            :default-active="activeIndex"
+                            class="el-menu-vertical-demo"
+                            :router="true">
+                            <el-menu-item index="/UserCenter/HomeComponent">
+                                <i class="el-icon-menu"></i>
+                                <span slot="title">首页</span>
+                            </el-menu-item>
+                            <el-menu-item index="/UserCenter/UserInfo">
+                                <i class="el-icon-document"></i>
+                                <span slot="title">个人信息</span>
+                            </el-menu-item>
+                            <el-menu-item index="/UserCenter/SettingCenter">
+                                <i class="el-icon-setting"></i>
+                                <span slot="title">设置中心</span>
+                            </el-menu-item>
+                        </el-menu>
+                    </el-col>
+                </div>
+                <el-card style="margin-left: 7px; padding-top: 0;" class="column is-two-thirds">
+                    <el-main style="padding: 0">
+                        <router-view/>
+                    </el-main>
                 </el-card>
             </div>
-            <el-card style="margin-left: 7px; padding-top: 0;" class="column is-two-thirds">
-                <el-main>
-                    <router-view/>
-                </el-main>
-            </el-card>
         </div>
     </div>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+import {getFollow, getInfo} from "@/api/admin/user";
+
 export default {
     name: "UserCenter",
     data() {
         return {
             activeIndex: '/UserCenter/HomeComponent',
+            followInfo: [],
+            userInfo: {}
         }
     },
+    computed: {
+        ...mapGetters([
+            'token',
+            'userId'
+        ])
+    },
+    mounted() {
+        if (this.token === '' || this.token === undefined) {
+            this.$notify({
+                title: '当前用户未登录',
+                message: '即将返回'
+            });
+            setTimeout(() => {
+                this.$router.push('/')
+            }, 1000)
+        } else {
+            getFollow({userId: this.userId}).then(value => {
+                this.followInfo = value.data
+            })
+            getInfo().then(value => {
+                this.userInfo = value.data
+            })
+        }
+    },
+    methods: {
+        pointCenter() {
+            this.$router.push('/PointCenter')
+        },
+        editPersonalInfo() {
+            this.$router.push('/PersonalInfo')
+        }
+    }
 }
 </script>
 
@@ -203,6 +248,33 @@ export default {
     opacity: 0.75;
     line-height: 200px;
     margin: 0;
+}
+
+.NumberBoard-itemName {
+    color: #8590a6;
+    font-size: 14px;
+    text-align: center;
+}
+
+.NumberBoard-itemValue {
+    color: #121212;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.Followed {
+    width: 50%;
+    float: left;
+    height: 100%;
+    padding: 5px 0px;
+    justify-content: center;
+    align-items: Center;
+}
+
+.Border {
+    border: 1px none #ccd2e0;
+    border-right-style: solid;
 }
 
 .el-carousel__item:nth-child(2n) {

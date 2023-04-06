@@ -7,6 +7,10 @@ import UserCenter from "@/page/UserCenter.vue";
 import HomeComponent from "@/components/UserCenter/HomeComponent.vue";
 import UserInfo from "@/components/UserCenter/UserInfo.vue";
 import SettingCenter from "@/components/UserCenter/SettingCenter.vue";
+import PointCenter from "@/page/PointCenter.vue";
+import PersonalInfo from "@/page/PersonalInfo.vue";
+import Create from "@/page/Create.vue";
+import ArticlePage from "@/page/ArticlePage.vue";
 Vue.use(Router)
 export const constantRoutes = [
     {
@@ -20,7 +24,18 @@ export const constantRoutes = [
     },
     {
         path: '/HomePage',
-        component: HomePage
+        component: HomePage,
+        children: [
+            // {
+            //     path: '/Blog',
+            //     component: Blog
+            // },
+
+        ]
+    },
+    {
+        path: '/Create',
+        component: Create
     },
     {
         path: '/UserCenter',
@@ -39,6 +54,18 @@ export const constantRoutes = [
                 component: SettingCenter
             }
         ]
+    },
+    {
+        path: '/ArticlePage',
+        component: ArticlePage
+    },
+    {
+        path: '/PointCenter',
+        component: PointCenter
+    },
+    {
+        path: '/PersonalInfo',
+        component: PersonalInfo
     }
 ]
 const createRouter = () => new Router({
